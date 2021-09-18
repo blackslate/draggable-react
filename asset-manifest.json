@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "//blackslate.github.io/draggable/draggable-react/static/css/main.d4fb3bda.chunk.css",
-    "main.js": "//blackslate.github.io/draggable/draggable-react/static/js/main.c113a579.chunk.js",
-    "main.js.map": "//blackslate.github.io/draggable/draggable-react/static/js/main.c113a579.chunk.js.map",
-    "runtime-main.js": "//blackslate.github.io/draggable/draggable-react/static/js/runtime-main.75f99408.js",
-    "runtime-main.js.map": "//blackslate.github.io/draggable/draggable-react/static/js/runtime-main.75f99408.js.map",
-    "static/js/2.ab5a8218.chunk.js": "//blackslate.github.io/draggable/draggable-react/static/js/2.ab5a8218.chunk.js",
-    "static/js/2.ab5a8218.chunk.js.map": "//blackslate.github.io/draggable/draggable-react/static/js/2.ab5a8218.chunk.js.map",
-    "index.html": "//blackslate.github.io/draggable/draggable-react/index.html",
-    "static/css/main.d4fb3bda.chunk.css.map": "//blackslate.github.io/draggable/draggable-react/static/css/main.d4fb3bda.chunk.css.map",
-    "static/js/2.ab5a8218.chunk.js.LICENSE.txt": "//blackslate.github.io/draggable/draggable-react/static/js/2.ab5a8218.chunk.js.LICENSE.txt"
+    "main.css": "/draggable-react/static/css/main.d4fb3bda.chunk.css",
+    "main.js": "/draggable-react/static/js/main.c113a579.chunk.js",
+    "main.js.map": "/draggable-react/static/js/main.c113a579.chunk.js.map",
+    "runtime-main.js": "/draggable-react/static/js/runtime-main.966b6054.js",
+    "runtime-main.js.map": "/draggable-react/static/js/runtime-main.966b6054.js.map",
+    "static/js/2.ab5a8218.chunk.js": "/draggable-react/static/js/2.ab5a8218.chunk.js",
+    "static/js/2.ab5a8218.chunk.js.map": "/draggable-react/static/js/2.ab5a8218.chunk.js.map",
+    "index.html": "/draggable-react/index.html",
+    "static/css/main.d4fb3bda.chunk.css.map": "/draggable-react/static/css/main.d4fb3bda.chunk.css.map",
+    "static/js/2.ab5a8218.chunk.js.LICENSE.txt": "/draggable-react/static/js/2.ab5a8218.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.75f99408.js",
+    "static/js/runtime-main.966b6054.js",
     "static/js/2.ab5a8218.chunk.js",
     "static/css/main.d4fb3bda.chunk.css",
     "static/js/main.c113a579.chunk.js"
