@@ -17,3 +17,5 @@ See the useEffect() function in App.js for the solution.
 
 ## See Also
 See the [companion repository](https://github.com/blackslate/draggable) and its [demo](https://blackslate.github.io/draggable/), for a similar solution using plain (non-React) JavaScript
+
+[Drag Module Gist](https://gist.github.com/blackslate/6f77d3acd2edc2a286cff6d607cf3ce8)
