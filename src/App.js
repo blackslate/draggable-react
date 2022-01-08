@@ -3,8 +3,7 @@ import './App.css';
 
 import {
     detectMovement
-  , setTrackedEvents
-  , getPageXY
+  , startTracking
 } from './drag'
 
 
@@ -12,48 +11,37 @@ function App() {
   const dragRef = useRef()
 
   let dragMe
-    , offset
     , cancelTracking
-
-
-  const drag = (event) => {
-    const { x, y } = getPageXY(event)
-
-    dragMe.style.left = (offset.x + x )+ "px"
-    dragMe.style.top =  (offset.y + y )+ "px"
-  }
+    , timeOut
 
 
   const drop = () => {
-    setTrackedEvents(cancelTracking)
+    cancelTracking()
     dragMe.style = {}
-    flashDiv()
+    flashDiv("You dragged me!")
   }
 
 
   const startDrag = (event) => {
-    const { x, y } = getPageXY(event)
-
-    const { left, top } = dragMe.getBoundingClientRect()
-    offset = { x: left - x, y: top - y }
+    reset()
+    dragMe.innerHTML = "Wheeee!"
 
     const options = {
       event
-    , drag
     , drop
     }
 
-    cancelTracking = setTrackedEvents(options)
+    cancelTracking = startTracking(options)
   }
 
 
   const checkForDrag = (event) => {
     event.preventDefault()
 
+    dragMe.innerHTML = "Drag me!"
+
     detectMovement(event, 16)
-    .then(
-      () => startDrag(event)
-     )
+    .then(() => startDrag(event))
     .catch(flashDiv)
   }
 
@@ -65,9 +53,26 @@ function App() {
   })
 
 
-  const flashDiv = () => {
+  const reset = () => {
+    clearTimeout(timeOut)
+    dragMe.classList.remove("flash")
+    dragMe.innerHTML = "Drag me!"
+  }
+
+
+  const flashDiv = (text) => {
     dragMe.classList.add("flash")
-    setTimeout(() => dragMe.classList.remove("flash"), 200)
+
+    if (text === "timeOut") { // called by reject
+      clearTimeout(timeOut)
+      const options = { once: true }
+      document.body.addEventListener("mouseup", reset, options)
+
+    } else {
+      timeOut = setTimeout(reset, 1000)
+    }
+
+    dragMe.innerHTML = text
   }
 
 
@@ -77,11 +82,15 @@ function App() {
       <div className="green"></div>
       <div className="blue"></div>
 
-      <div
-        className="draggable unselectable"
-        onMouseDown={checkForDrag}
-        ref={dragRef}
-      />
+      <div className="container">
+        <div
+          className="draggable unselectable"
+          onMouseDown={checkForDrag}
+          ref={dragRef}
+        >
+          Drag me!
+        </div>
+      </div>
     </main>
   );
 }
