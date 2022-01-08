@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "//blackslate.github.io/draggable/draggable-react/static/css/main.e650e216.chunk.css",
-    "main.js": "//blackslate.github.io/draggable/draggable-react/static/js/main.c0473e55.chunk.js",
-    "main.js.map": "//blackslate.github.io/draggable/draggable-react/static/js/main.c0473e55.chunk.js.map",
+    "main.css": "//blackslate.github.io/draggable/draggable-react/static/css/main.82ca095d.chunk.css",
+    "main.js": "//blackslate.github.io/draggable/draggable-react/static/js/main.ee9f360d.chunk.js",
+    "main.js.map": "//blackslate.github.io/draggable/draggable-react/static/js/main.ee9f360d.chunk.js.map",
     "runtime-main.js": "//blackslate.github.io/draggable/draggable-react/static/js/runtime-main.75f99408.js",
     "runtime-main.js.map": "//blackslate.github.io/draggable/draggable-react/static/js/runtime-main.75f99408.js.map",
     "static/js/2.ab5a8218.chunk.js": "//blackslate.github.io/draggable/draggable-react/static/js/2.ab5a8218.chunk.js",
     "static/js/2.ab5a8218.chunk.js.map": "//blackslate.github.io/draggable/draggable-react/static/js/2.ab5a8218.chunk.js.map",
     "index.html": "//blackslate.github.io/draggable/draggable-react/index.html",
-    "static/css/main.e650e216.chunk.css.map": "//blackslate.github.io/draggable/draggable-react/static/css/main.e650e216.chunk.css.map",
+    "static/css/main.82ca095d.chunk.css.map": "//blackslate.github.io/draggable/draggable-react/static/css/main.82ca095d.chunk.css.map",
     "static/js/2.ab5a8218.chunk.js.LICENSE.txt": "//blackslate.github.io/draggable/draggable-react/static/js/2.ab5a8218.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.75f99408.js",
     "static/js/2.ab5a8218.chunk.js",
-    "static/css/main.e650e216.chunk.css",
-    "static/js/main.c0473e55.chunk.js"
+    "static/css/main.82ca095d.chunk.css",
+    "static/js/main.ee9f360d.chunk.js"
   ]
 }
