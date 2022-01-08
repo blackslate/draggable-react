@@ -67,6 +67,7 @@ function App() {
       clearTimeout(timeOut)
       const options = { once: true }
       document.body.addEventListener("mouseup", reset, options)
+      document.body.addEventListener("touchend", reset, options)
 
     } else {
       timeOut = setTimeout(reset, 1000)
