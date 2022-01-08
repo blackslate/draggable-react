@@ -1,2 +1,0 @@
-body{margin:0;overflow:hidden}main{background-color:#282c34;min-width:100vw;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;border:.1rem solid #fff;box-sizing:border-box}div{height:33vh;width:99vw}.red{background-color:#300}.green{background-color:#030}.blue{background-color:#003}div.draggable{position:absolute;height:40vmin;width:40vmin;background-color:#c90}div.flash{background-color:#fff}.unselectable{-webkit-user-select:none;-ms-user-select:none;user-select:none}
-/*# sourceMappingURL=main.d4fb3bda.chunk.css.map */
