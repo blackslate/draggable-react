@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/draggable-react/static/css/main.82ca095d.chunk.css",
-    "main.js": "/draggable-react/static/js/main.9e7f4e29.chunk.js",
-    "main.js.map": "/draggable-react/static/js/main.9e7f4e29.chunk.js.map",
+    "main.css": "/draggable-react/static/css/main.7b4b715e.chunk.css",
+    "main.js": "/draggable-react/static/js/main.cde84cfc.chunk.js",
+    "main.js.map": "/draggable-react/static/js/main.cde84cfc.chunk.js.map",
     "runtime-main.js": "/draggable-react/static/js/runtime-main.966b6054.js",
     "runtime-main.js.map": "/draggable-react/static/js/runtime-main.966b6054.js.map",
     "static/js/2.ab5a8218.chunk.js": "/draggable-react/static/js/2.ab5a8218.chunk.js",
     "static/js/2.ab5a8218.chunk.js.map": "/draggable-react/static/js/2.ab5a8218.chunk.js.map",
     "index.html": "/draggable-react/index.html",
-    "static/css/main.82ca095d.chunk.css.map": "/draggable-react/static/css/main.82ca095d.chunk.css.map",
+    "static/css/main.7b4b715e.chunk.css.map": "/draggable-react/static/css/main.7b4b715e.chunk.css.map",
     "static/js/2.ab5a8218.chunk.js.LICENSE.txt": "/draggable-react/static/js/2.ab5a8218.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.966b6054.js",
     "static/js/2.ab5a8218.chunk.js",
-    "static/css/main.82ca095d.chunk.css",
-    "static/js/main.9e7f4e29.chunk.js"
+    "static/css/main.7b4b715e.chunk.css",
+    "static/js/main.cde84cfc.chunk.js"
   ]
 }
