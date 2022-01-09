@@ -37,7 +37,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://https://blackslate.github.io/draggable/draggable-react",
   "devDependencies": {
     "gh-pages": "^3.2.3"
   }

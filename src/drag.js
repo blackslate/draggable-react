@@ -10,23 +10,37 @@
  * function (plus the functions below) to determine which of the two
  * actions will be triggered.
  *
- *  const checkForDrag = (event) => {
- *    event.preventDefault()
+ * let dragMe = <your draggable element>
+ *   , cancelDrag // set to a function that will cancel dragging
  *
- *    detectMovement(event, 10, 250) //
- *    .then(
- *      () => startDrag(event) // use same event to start drag action
- *     )
- *    .catch(clickAction)
- *  }
+ * const drop = () => {
+ *   // Do whatever needs to be done when dragged element is dropped
+ * }
+ *
+ * const startDrag = (event) => {
+ *   const options = {
+ *     event
+ *   , drop
+ *   }
+ *
+ *   startTracking(options)
+ * }
+ *
+ * const checkForDrag = (event) => {
+ *   event.preventDefault()
+ *
+ *   detectMovement(event, 10, 250)
+ *   .then(() => startDrag(event) )
+ *   .catch(clickAction)
+ * }
  *
  * startDrag will be called if the mouse or touch point moves 10 pixels
- * or more within 250 milliseconds. clickAction will be called if there
+ * or more within 250 milliseconds; clickAction will be called if there
  * is no movement within this time, or if the mouse/touch pressure is
  * released before this time.
  *
- * SET TRACKED EVENTS
- * ------------------
+ * TRACKING
+ * --------
  * When dragging an element, you generally want one function to be
  * called for any movement, and another to be triggered when the element
  * is dropped. You don't want to have to create separate code for
@@ -43,37 +57,6 @@
  * You can use getPageXY() to get the current mouse position or the
  * position of the first touch point, without worrying about whether
  * the input is from a mouse or a touch screen.
- *
- * let dragMe = <your draggable element>
- *   , cancelTracking // set to function to stop dragging
- *
- * const drop = () => {
- *   canceTracking()
- *   // Do whatever needs to be done when the element is dropped
- * }
- *
- * const startDrag = (event) => {
- *   const { x, y } = getPageXY(event)
- *   const { left, top } = dragMe.getBoundingClientRect()
- *   offset = { x: left - x, y: top - y }
- *
- *   const options = {
- *     event
- *   , drop
- *   }
- *
- *   // Store the callback functions to remove the event listeners
- *   // from the element when the drag is complete.
- *   cancelTracking = startTracking(options)
- * }
- *
- * const checkForDrag = (event) => {
- *   event.preventDefault()
- *
- *   detectMovement(event, 16)
- *   .then(() => startDrag(event) )
- *   .catch(clickAction)
- * }
  *
  * ===============================================================
  * NOTE FOR REACT USERS CREATING WEB APPS FOR TOUCH SCREEN DEVICES
@@ -108,6 +91,8 @@
  * })
  */
 
+
+
  const getPageXY = (event) => {
   if (event.targetTouches && event.targetTouches.length) {
     event = event.targetTouches[0] || {}
@@ -141,7 +126,7 @@ export const detectMovement = (event, triggerDelta, timeOut) => {
   function movementDetected(resolve, reject) {
     const { x: startX, y: startY } = getPageXY(event)
     const options = { event, drag, drop }
-    const cancelTracking = startTracking(options)
+    const cancelDrag = startTracking(options)
 
     // Check if the mouse/touch has moved more than triggerDelta
     // pixels in any direction, and resolve promise if so.
@@ -152,7 +137,7 @@ export const detectMovement = (event, triggerDelta, timeOut) => {
       const delta2 = (deltaX * deltaX + deltaY * deltaY)
 
       if (delta2 > trigger2) {
-        cancelTracking()
+        cancelDrag()
         resolve()
       }
     }
@@ -160,7 +145,7 @@ export const detectMovement = (event, triggerDelta, timeOut) => {
     // Reject promise if the mouse is released before the mouse/touch
     // moved triggerDelta pixels in any direction.
     function drop() {
-      cancelTracking()
+      cancelDrag()
       reject("release")
     }
 
@@ -173,7 +158,10 @@ export const detectMovement = (event, triggerDelta, timeOut) => {
 }
 
 
+
 /**
+ * Called by defaultDragAction
+ *
  * @param {DOMElement} element
  * @returns  element's closest parent which has a position other than
  *           static
@@ -196,7 +184,7 @@ const getNonStaticParent = (element) => {
 
 /**
  * If no drag function is supplied, move the target (or its parent)
- * with the mouse or touch
+ * with the mouse or touch. Called by startTracking.
  *
  * @param {MouseEvent | TouchEvent} event
  * @param {String?} selector
@@ -248,7 +236,9 @@ const noDefault = (event) => event.preventDefault()
 
 
 /**
- * Starts a drag and drop operation, and follows it through to the end.
+ * Starts listening for a drag and drop operation, and follows it
+ * through to the end. The operation can be cancelled at any time
+ * by calling the function returned by startTracking.
  *
  * @param {Object}
  *          event: may be either a MouseDown event or a TouchStart event
@@ -261,14 +251,16 @@ const noDefault = (event) => event.preventDefault()
  *         offset: may be an object of the form { x: Number, y: Number}
  *                 to be used by the defaultDragAction function.
  *
- * @returns a function to call to cancelTracking
+ * @returns        a function that can be called to cancelDrag
+ *                 (before it starts). However, this function will be
+ *                 called automatically when the drag process ends.
  */
 export const startTracking = ({ event, drag, drop, offset }) => {
   const body = document.body
   const dragOption = { passive: false } // capture is false by default
 
   let move
-  , end
+    , end
 
   if (event.type === "touchstart") {
     move  = "touchmove"
@@ -283,21 +275,30 @@ export const startTracking = ({ event, drag, drop, offset }) => {
       // Use the custom function
     break
     default: // case "string":
+      // Use the default function. `drag` may be a parent selector.
       drag = defaultDragAction(event, drag, offset)
     break
   }
 
+  // cancelDrag may be called from outside, before any drag or
+  // drop events have occurred, in which case `event` may be
+  // undefined. If the call was triggeerd by an `end` event, then
+  // the drop function will be called.
+  const cancelDrag = (event) => {
+    body.removeEventListener(move, drag, false)
+    body.removeEventListener(end, cancelDrag, false)
+    // Restore page scrolling on touch devices now that drag is over
+    document.removeEventListener("touchstart", noDefault)
+
+    if (event && typeof drop === "function") {
+      drop(event)
+    }
+  }
+
   body.addEventListener(move, drag, false)
-  body.addEventListener(end, drop, false)
+  body.addEventListener(end, cancelDrag, false)
   // Prevent the page scrolling during drag, on touch devices
   document.addEventListener("touchstart", noDefault, dragOption)
 
-  const cancelTracking = () => {
-    body.removeEventListener(move, drag, false)
-    body.removeEventListener(end, drop, false)
-    // Restore page scrolling on touch devices now that drag is over
-    document.removeEventListener("touchstart", noDefault)
-  }
-
-  return cancelTracking
+  return cancelDrag
 }
